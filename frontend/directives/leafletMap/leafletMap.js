@@ -60,6 +60,7 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
                     if(alt !== undefined) pos.alt = alt;
 
                     marker.setLatLng(pos);
+		    marker.update();
 
                     this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
                     this.ngModel = this.markers.map(function(m){ return m._latlng});
