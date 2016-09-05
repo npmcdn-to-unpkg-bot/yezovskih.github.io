@@ -17,7 +17,7 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
             this.map = L.map('leaflet-map').setView([50.4501, 30.5234], 13);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+                attribution: 'Map data ï¿½ <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
                 maxZoom: 18
             }).addTo(this.map);
 
@@ -60,7 +60,6 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
                     if(alt !== undefined) pos.alt = alt;
 
                     marker.setLatLng(pos);
-		    marker.update();
 
                     this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
                     this.ngModel = this.markers.map(function(m){ return m._latlng});
