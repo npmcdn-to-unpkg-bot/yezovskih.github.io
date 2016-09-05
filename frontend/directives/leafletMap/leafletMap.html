@@ -1,0 +1,39 @@
+<div class="leaflet-map-container">
+    <div id="leaflet-map"></div>
+
+    <div class="map-modal-overlay" ng-if="lm.showModal"></div>
+    <div class="map-modal" ng-if="lm.showModal">
+        <div class="map-modal-header">
+            <p class="map-modal-header-title">Изменить параметры точки</p>
+        </div>
+        <form name="markerEdit" class="map-modal-body">
+            <div class="map-modal-body-field">
+                <label for="l-marker-index">Номер</label>
+                <input id="l-marker-index" name="index" ng-model="lm.selectedPoint.index" type="text" required ng-pattern="/^[1-9][0-9]*$/">
+                <p ng-show="markerEdit.index.$error.pattern" class="form-error">Ошибка! Введите целое число больше 0.</p>
+                <p ng-show="markerEdit.index.$error.required" class="form-error">Заполните это поле.</p>
+            </div>
+            <div class="map-modal-body-field">
+                <label for="l-marker-lat">Ширина</label>
+                <input id="l-marker-lat" name="lat" ng-model="lm.selectedPoint.lat" type="text" required ng-pattern="/^[-]?[\d.]+$/">
+                <p ng-show="markerEdit.lat.$error.pattern" class="form-error">Ошибка! Введите целое или дробное число.</p>
+                <p ng-show="markerEdit.lat.$error.required" class="form-error">Заполните это поле.</p>
+            </div>
+            <div class="map-modal-body-field">
+                <label for="l-marker-lng">Долгота</label>
+                <input id="l-marker-lng" name="lng" ng-model="lm.selectedPoint.lng" type="text" required ng-pattern="/^[-]?[\d.]+$/">
+                <p ng-show="markerEdit.lng.$error.pattern" class="form-error">Ошибка! Введите целое или дробное число.</p>
+                <p ng-show="markerEdit.lng.$error.required" class="form-error">Заполните это поле.</p>
+            </div>
+            <div class="map-modal-body-field">
+                <label for="l-marker-alt">Высота</label>
+                <input id="l-marker-alt" name="alt" ng-model="lm.selectedPoint.alt" type="text" ng-pattern="/^[-]?[\d.]+$/">
+                <p ng-show="markerEdit.alt.$error.pattern" class="form-error">Ошибка! Введите целое или дробное число.</p>
+            </div>
+        </form>
+        <div class="map-modal-footer">
+            <button ng-disabled="markerEdit.$invalid" class="btn-blue" ng-click="lm.submitEditMarkerHandler()">Ок</button>
+            <button class="btn-blue" ng-click="lm.deleteMarker()">Удалить</button>
+        </div>
+    </div>
+</div>
