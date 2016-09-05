@@ -55,8 +55,12 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
                 }).bind(this);
 
                 var dragendMarkerHandler = (function(e) {
-                    latlng.lat = e.target._latlng.lat;
-                    latlng.lng = e.target._latlng.lng;
+                    var alt = marker._latlng.alt;
+                    var pos = {lat: e.target._latlng.lat, lng: e.target._latlng.lng};
+                    if(alt !== undefined) pos.alt = alt;
+
+                    marker.setLatLng(pos);
+
                     this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
                     this.ngModel = this.markers.map(function(m){ return m._latlng});
                 }).bind(this);
