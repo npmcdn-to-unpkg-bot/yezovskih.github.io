@@ -83,9 +83,9 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
 
                 // remove from array and render polyline
                 if(ind !== -1) {
-                    leafletService.removeAllMarkersFromMap(map, markers);
+                    leafletService.removeAllMarkersFromMap(this.map, this.markers);
                     this.markers.splice(ind, 1);
-                    leafletService.renderAllMarkersOnMap(map, markers);
+                    leafletService.renderAllMarkersOnMap(this.map, this.markers);
                     this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
 
                     this.ngModel = this.markers.map(function(m){ return m._latlng});

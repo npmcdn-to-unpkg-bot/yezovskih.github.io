@@ -17,7 +17,7 @@ angular.module('myApp').service('leafletService', function() {
         markers.splice(0, markers.length);
 
         for(var i = 0; i < arr.length; i++) {
-            this.createMarker(arr[i]);
+            this.createMarker(map, markers, arr[i]);
         }
     }
 
