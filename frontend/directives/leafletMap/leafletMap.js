@@ -16,7 +16,7 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
             this.polyline = null;
             this.map = L.map('leaflet-map').setView([50.4501, 30.5234], 13);
 
-            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
                 maxZoom: 18
             }).addTo(this.map);
