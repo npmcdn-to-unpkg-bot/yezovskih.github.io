@@ -30,6 +30,13 @@ angular.module('myApp').service('leafletService', function() {
         } else {
            polyline.setLatLngs(arr);
         }
+        var decorator = L.polylineDecorator(polyline, {
+            patterns: [
+                {
+                    offset: '100%', repeat: 0, symbol: new L.Symbol.arrowHead({pixelSize: 10, pathOptions: {color: 'red'}})
+                }
+            ]
+        }).addTo(map);
 
         return polyline;
     }
