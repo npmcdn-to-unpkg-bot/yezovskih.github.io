@@ -36,7 +36,7 @@ angular.module('myApp').service('leafletService', function() {
                             {
                                 offset: '100%',
                                 repeat: 0,
-                                symbol: new L.Symbol.arrowHead({pixelSize: 10, pathOptions: {color: 'red'}})
+                                symbol: new L.Symbol.arrowHead({pixelSize: 15, pathOptions: {fillOpacity: 1, color: 'red'}})
                             }
                         ]
                     }).addTo(map);
