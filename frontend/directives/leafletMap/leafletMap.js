@@ -32,9 +32,7 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
                 }
             }).bind(this);
 
-            var pointClickHandler = (function (e) {
-                var latlng = e.latlng,
-                    marker = leafletService.createMarker(this.map, this.markers, latlng);
+            var addEventListenersToMarker = (function(marker) {
 
                 var clickMarkerHandler = (function(e){
                     e.originalEvent.stopPropagation();
@@ -68,6 +66,14 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
                 marker.on('dragend', dragendMarkerHandler);
                 marker.on('click', clickMarkerHandler);
 
+            }).bind(this);
+
+            var pointClickHandler = (function (e) {
+                var latlng = e.latlng,
+                    marker = leafletService.createMarker(this.map, this.markers, latlng);
+
+                addEventListenersToMarker(marker);
+
                 this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
 
                 this.ngModel = this.markers.map(function(m){ return m._latlng});
@@ -90,6 +96,10 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
                     leafletService.removeAllMarkersFromMap(this.map, this.markers);
                     this.markers.splice(ind, 1);
                     leafletService.renderAllMarkersOnMap(this.map, this.markers);
+
+                    for(var i = 0; i < this.markers.length; i++) {
+                        addEventListenersToMarker(this.markers[i]);
+                    }
                     this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
 
                     this.ngModel = this.markers.map(function(m){ return m._latlng});
