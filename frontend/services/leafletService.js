@@ -23,10 +23,15 @@ angular.module('myApp').service('leafletService', function() {
 
     // returns new polyline
     this.renderPolyline = function(polyline, markers, map){
-        if(polyline) map.removeLayer(polyline);
-
         var arr = markers.map(function(m){ return m._latlng});
-        return L.polyline(arr, {color: 'red'}).addTo(map);
+
+        if(!polyline) {
+            polyline = L.polyline(arr, {color: 'red'}).addTo(map);
+        } else {
+           polyline.setLatLngs(arr);
+        }
+
+        return polyline;
     }
 
     // adds marker to map.
