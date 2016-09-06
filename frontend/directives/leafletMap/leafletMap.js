@@ -13,13 +13,18 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
             this.showModal = false;
 
             this.markers = [];
-            this.polyline = null;
             this.map = L.map('leaflet-map').setView([50.4501, 30.5234], 13);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: 'Map data � <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
                 maxZoom: 18
             }).addTo(this.map);
+
+            this.polyline = null;
+
+            function removePolyline(){
+
+            }
 
             this.selectedPoint = {index: null, lat: null, lng: null, alt: null, marker: null};
 
@@ -59,7 +64,8 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
 
                     marker.setLatLng(pos);
 
-                    this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
+                    this.polyline = leafletService.drawPolyline(this.polyline, this.markers, this.map);
+
                     this.ngModel = this.markers.map(function(m){ return m._latlng});
                 }).bind(this);
 
@@ -74,7 +80,7 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
 
                 addEventListenersToMarker(marker);
 
-                this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
+                this.polyline = leafletService.drawPolyline(this.polyline, this.markers, this.map);
 
                 this.ngModel = this.markers.map(function(m){ return m._latlng});
             }).bind(this);
@@ -100,7 +106,7 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
                     for(var i = 0; i < this.markers.length; i++) {
                         addEventListenersToMarker(this.markers[i]);
                     }
-                    this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
+                    this.polyline = leafletService.drawPolyline(this.polyline, this.markers, this.map);
 
                     this.ngModel = this.markers.map(function(m){ return m._latlng});
                 }
@@ -140,7 +146,7 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
 
                 this.selectedPoint.marker.setLatLng(latlng);
 
-                this.polyline = leafletService.renderPolyline(this.polyline, this.markers, this.map);
+                this.polyline = leafletService.drawPolyline(this.polyline, this.markers, this.map);
 
                 this.ngModel = this.markers.map(function(m){ return m._latlng});
 
