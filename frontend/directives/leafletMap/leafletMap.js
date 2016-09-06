@@ -22,10 +22,6 @@ angular.module('myApp').directive('leafletMap', ['leafletService', '$document', 
 
             this.polyline = null;
 
-            function removePolyline(){
-
-            }
-
             this.selectedPoint = {index: null, lat: null, lng: null, alt: null, marker: null};
 
             var documentClickHandler = (function(e) {
